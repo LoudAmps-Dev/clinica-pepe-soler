@@ -543,7 +543,7 @@ const FindUs = () => (
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3144.2397172286696!2d-1.1442086239636888!3d37.99486869945106!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd63818cc5b596ab%3A0xfc914bc0c41afb47!2sCl%C3%ADnica%20de%20Osteopatia%20y%20Fisioterapia%20Pepe%20Soler!5e0!3m2!1ses!2ses!4v1779796072636!5m2!1ses!2ses"
           width="100%" height="100%"
           style={{ border: 0 }}
-          allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"
+          allowFullScreen="" loading="eager" referrerPolicy="no-referrer-when-downgrade"
         />
       </div>
     </div>
