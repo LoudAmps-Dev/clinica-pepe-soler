@@ -483,79 +483,6 @@ const About = () => (
   </section>
 );
 
-// ─── Reviews ──────────────────────────────────────────────────────
-const REVIEWS = [
-  {
-    text: "Gracias a Pepe y su equipo yo puedo mover mi brazo después de tener un accidente. Me atropelló un monopatín y me destrozó el brazo. Tras 6 meses de fisio por la aseguradora sin resultados, si no me pongo en sus manos mi brazo no recupera la movilidad. Humanos y profesionales.",
-    name: "Lola Martínez",
-  },
-  {
-    text: "Sin duda un gran profesional. Fui destrozado de pierna y brazo. De un accidente. Super profesionales. Rápida recuperación y un trato humano. Siempre agradecido.",
-    name: "Clemente García Revelderia",
-  },
-];
-
-const Reviews = () => (
-  <section className="cps-section" style={{ background: C.bg }}>
-    <div className="cps-reviews__grid">
-
-      {/* Review 1 */}
-      <div className="reveal cps-review-card">
-        <div style={{ display: "flex", gap: 3, color: C.teal500, marginBottom: 16 }}>
-          {[1,2,3,4,5].map(j => <IcoStarFilled key={j} size={13} />)}
-        </div>
-        <p className="cps-review-quote">"{REVIEWS[0].text}"</p>
-        <div style={{ marginTop: 16, fontSize: 11, letterSpacing: ".13em",
-          textTransform: "uppercase", color: C.muted, fontWeight: 500 }}>
-          — {REVIEWS[0].name} · Reseña Google
-        </div>
-      </div>
-
-      {/* Center — aggregate score */}
-      <div className="reveal cps-review-center">
-        <div className="cps-review-score">4,5</div>
-        <div style={{ display: "flex", gap: 4, marginTop: 12, color: C.teal500, alignItems: "center", justifyContent: "center" }}>
-          {[1,2,3,4].map(i => <IcoStarFilled key={i} size={16} />)}
-          <svg width={16} height={16} viewBox="0 0 24 24" aria-hidden>
-            <defs>
-              <linearGradient id="half">
-                <stop offset="50%" stopColor="#14b8a6" />
-                <stop offset="50%" stopColor="#d2f1ea" />
-              </linearGradient>
-            </defs>
-            <path fill="url(#half)" d="m12 2.5 2.95 6 6.6.96-4.78 4.65 1.13 6.57L12 17.6l-5.9 3.1 1.13-6.58-4.78-4.65 6.6-.96L12 2.5Z"/>
-          </svg>
-        </div>
-        <div style={{ marginTop: 14, fontSize: 13, color: C.muted, lineHeight: 1.6 }}>
-          Puntuación en Google Maps<br />
-          36 reseñas verificadas
-        </div>
-        <a
-          href="https://maps.google.com/?q=Clínica+Osteopatia+Fisioterapia+Pepe+Soler+Calle+Pina+6+Murcia"
-          target="_blank" rel="noopener noreferrer"
-          style={{ display: "inline-flex", alignItems: "center", gap: 8,
-            marginTop: 28, fontSize: 13.5, fontWeight: 600, color: C.teal700,
-            transition: "gap 150ms",
-          }}>
-          Ver todas las reseñas <IcoArrow size={14} />
-        </a>
-      </div>
-
-      {/* Review 2 */}
-      <div className="reveal cps-review-card">
-        <div style={{ display: "flex", gap: 3, color: C.teal500, marginBottom: 16 }}>
-          {[1,2,3,4,5].map(j => <IcoStarFilled key={j} size={13} />)}
-        </div>
-        <p className="cps-review-quote">"{REVIEWS[1].text}"</p>
-        <div style={{ marginTop: 16, fontSize: 11, letterSpacing: ".13em",
-          textTransform: "uppercase", color: C.muted, fontWeight: 500 }}>
-          — {REVIEWS[1].name} · Reseña Google
-        </div>
-      </div>
-
-    </div>
-  </section>
-);
 
 // ─── Find us ──────────────────────────────────────────────────────
 const FindUs = () => (
@@ -762,7 +689,6 @@ const VariantA = () => {
         <TrustStrip />
         <Treatments />
         <About />
-        <Reviews />
         <FindUs />
         <HoursContact />
       </main>
