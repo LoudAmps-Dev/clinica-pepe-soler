@@ -571,6 +571,8 @@ const GALLERY = [
   ["assets/Equipo/clinica3.jpg", "Instalaciones de Clínica Pepe Soler"],
 ];
 
+const MAPS_URL = "https://maps.google.com/?q=Cl%C3%ADnica+Osteopatia+Fisioterapia+Pepe+Soler+Calle+Pina+6+Murcia";
+
 const ClinicGallery = () => {
   const { ref: galleryRef, active: galleryActive, goTo: galleryGoTo } = useSliderDots(GALLERY.length);
   return (
@@ -582,7 +584,7 @@ const ClinicGallery = () => {
           <p>
             Consulta sanitaria en Calle Pina Nº 6, Murcia.{" "}
             <a
-              href="https://maps.google.com/?q=Clínica+Osteopatia+Fisioterapia+Pepe+Soler+Calle+Pina+6+Murcia"
+              href={MAPS_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="cps-inline-link"
@@ -605,59 +607,46 @@ const ClinicGallery = () => {
   );
 };
 
-const VisitSummary = () => (
-  <section id="cita" className="cps-landing-section cps-visit">
-    <div className="cps-landing-section__head reveal">
-      <div className="cps-overline">Información práctica</div>
-      <h2 className="cps-h2">Contacto y cita previa.</h2>
-      <p>Atención en consulta con cita previa.</p>
-    </div>
-
-    <div className="cps-visit-grid">
-      <div className="cps-visit-card reveal">
-        <IcoPhone size={20} />
-        <h3>Contacto</h3>
-        <a href="tel:+34968295860">968 29 58 60</a>
-        <a href="https://wa.me/34645752082" target="_blank" rel="noopener noreferrer">645 75 20 82</a>
-        <a href="mailto:clinicapepesoler@hotmail.com">clinicapepesoler@hotmail.com</a>
+const VisitSummary = () => {
+  return (
+    <section id="cita" className="cps-landing-section cps-visit">
+      <div className="cps-landing-section__head reveal">
+        <div className="cps-overline">Información práctica</div>
+        <h2 className="cps-h2">Contacto y cita previa.</h2>
+        <p>Atención en consulta con cita previa.</p>
       </div>
 
-      <div className="cps-visit-card reveal">
-        <IcoClock size={20} />
-        <h3>Horario</h3>
-        <p>Lunes a viernes</p>
-        <strong>09:00 - 13:00 · 16:00 - 19:30</strong>
-        <p>Sábado y domingo: cerrado</p>
-      </div>
-
-      <div className="cps-visit-card reveal">
-        <IcoPin size={20} />
-        <h3>Ubicación</h3>
-        <p>Calle Pina, Nº 6 - Bajo</p>
-        <p>30009 Murcia</p>
-        <a href="https://maps.google.com/?q=Clínica+Osteopatia+Fisioterapia+Pepe+Soler+Calle+Pina+6+Murcia"
-           target="_blank" rel="noopener noreferrer">
-          Cómo llegar <IcoArrow size={14} />
-        </a>
-      </div>
-    </div>
-
-    <div className="cps-visit-map reveal">
-      <div className="cps-map-wrap">
-        <div className="cps-map-wrap__bar">
-          <IcoPin size={13} /> Calle Pina, Nº 6 · 30009 Murcia
+      <div className="cps-visit-grid">
+        <div className="cps-visit-card reveal">
+          <IcoPhone size={20} />
+          <h3>Contacto</h3>
+          <a href="tel:+34968295860">968 29 58 60</a>
+          <a href="https://wa.me/34645752082" target="_blank" rel="noopener noreferrer">645 75 20 82</a>
+          <a href="mailto:clinicapepesoler@hotmail.com">clinicapepesoler@hotmail.com</a>
         </div>
-        <iframe
-          title="Ubicación Clínica Pepe Soler"
-          src="https://maps.google.com/maps?q=Calle+Pina+6+Murcia+Espa%C3%B1a&output=embed"
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          allowFullScreen
-        />
+
+        <div className="cps-visit-card reveal">
+          <IcoClock size={20} />
+          <h3>Horario</h3>
+          <p>Lunes a viernes</p>
+          <strong>09:00 - 13:00 · 16:00 - 19:30</strong>
+          <p>Sábado y domingo: cerrado</p>
+        </div>
+
+        <div className="cps-visit-card reveal">
+          <IcoPin size={20} />
+          <h3>Ubicación</h3>
+          <p>Calle Pina, Nº 6 - Bajo</p>
+          <p>30009 Murcia</p>
+          <a href={MAPS_URL} target="_blank" rel="noopener noreferrer">
+            Cómo llegar <IcoArrow size={14} />
+          </a>
+        </div>
       </div>
-    </div>
-  </section>
-);
+
+    </section>
+  );
+};
 
 // ─── WhatsApp flotante ────────────────────────────────────────────
 const WaFloat = () => {
