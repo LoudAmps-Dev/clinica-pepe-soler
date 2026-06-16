@@ -802,8 +802,8 @@ const AppointmentModal = ({ open, initialTreatment, onClose }) => {
 const Footer = () => (
   <footer className="cps-footer">
     <div className="cps-footer__legal">
-      © 2026 Clínica de Osteopatía y Fisioterapia Pepe Soler ·{" "}
-      Fisioterapeuta Col. 39 · Osteópata D.O. (F.) MROE-226
+      <span>© 2026 Clínica de Osteopatía y Fisioterapia Pepe Soler</span>
+      <span>Fisioterapeuta Col. 39 · Osteópata D.O. (F.) MROE-226</span>
     </div>
     <div className="cps-footer__credit">
       Made in Murcia by{" "}

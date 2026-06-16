@@ -1039,20 +1039,58 @@
 
 /* ─── 12. FOOTER ───────────────────────────────────────────────── */
 .cps-footer {
-  background: #062f2c; color: rgba(207,229,224,.72);
-  padding: 20px var(--px);
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 16px; flex-wrap: wrap; font-size: var(--text-xs); line-height: 1.6;
+  background: #062f2c;
+  color: rgba(207,229,224,.72);
+  padding: 30px var(--px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  justify-items: center;
+  gap: 14px;
+  text-align: center;
+  font-size: var(--text-xs); line-height: 1.6;
 }
-.cps-footer__legal { max-width: 560px; }
-.cps-footer__credit { color: rgba(207,229,224,.86); font-weight: 700; }
+.cps-footer__legal {
+  display: grid;
+  gap: 4px;
+  max-width: 680px;
+  color: rgba(232,246,242,.82);
+}
+.cps-footer__legal span:first-child {
+  color: rgba(255,255,255,.92);
+  font-weight: 700;
+}
+.cps-footer__legal span:last-child {
+  color: rgba(207,229,224,.66);
+}
+.cps-footer__credit {
+  color: rgba(207,229,224,.78);
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+}
 .cps-footer__links {
   display: flex;
-  gap: 18px;
+  gap: 8px;
   flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 4px;
 }
-.cps-footer a { color: inherit; transition: color var(--t-fast); }
-.cps-footer a:hover { color: rgba(207,229,224,1); }
+.cps-footer a { color: inherit; transition: color var(--t-fast), border-color var(--t-fast), background var(--t-fast); }
+.cps-footer__credit a { color: rgba(255,255,255,.9); }
+.cps-footer__links a {
+  border: 1px solid rgba(207,229,224,.18);
+  border-radius: 999px;
+  padding: 6px 11px;
+  background: rgba(255,255,255,.035);
+}
+.cps-footer a:hover {
+  color: rgba(255,255,255,1);
+}
+.cps-footer__links a:hover {
+  border-color: rgba(94,234,212,.42);
+  background: rgba(94,234,212,.08);
+}
 
 /* ─── 16. WHATSAPP FLOTANTE ─────────────────────────────────────── */
 .cps-root .cps-wa-float {
@@ -1267,6 +1305,14 @@
   .cps-hero__lead { max-width: 100%; }
   .cps-hero-img-wrap  { height: 380px; }
   .cps-about-img-wrap { height: 360px; }
+  .cps-footer {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+  .cps-footer__legal { max-width: 620px; }
+  .cps-footer__links { justify-content: center; }
 
   /* Hide offset border frames on mobile — no room for the overhang */
   .cps-hero-deco  { display: none !important; }
@@ -1308,4 +1354,13 @@
   .cps-hero-img-wrap  { height: 300px; }
   .cps-about-img-wrap { height: 280px; }
   .cps-trust__item { padding: 12px 16px; }
+  .cps-footer {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+  .cps-footer__credit { white-space: normal; }
+  .cps-footer__links {
+    width: 100%;
+    gap: 10px 16px;
+  }
 }
