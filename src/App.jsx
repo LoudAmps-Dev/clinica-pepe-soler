@@ -5,6 +5,8 @@ const C = {
   teal300: "#5eead4", teal100: "#d2f1ea", teal50:  "#effaf7",
   ink: "#0b1f1d", muted: "#4f6b6a", rule: "#dfeae8", paper: "#ffffff", bg: "#f4f8f7",
 };
+const WHATSAPP_PHONE = "34645752082";
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_PHONE}`;
 
 // ─── Icons ────────────────────────────────────────────────────────
 const Ico = ({ d, size = 20, sw = 1.6, fill = "none" }) => (
@@ -408,7 +410,7 @@ const DISCIPLINES = [
   },
 ];
 
-const Treatments = () => {
+const Treatments = ({ onAppointment }) => {
   const { ref: txRef, active: txActive, goTo: txGoTo } = useSliderDots(DISCIPLINES.length);
   return (
     <section
@@ -443,13 +445,13 @@ const Treatments = () => {
                 ))}
               </ul>
 
-              <a
-                href="https://wa.me/34645752082"
-                target="_blank" rel="noopener noreferrer"
+              <button
+                type="button"
                 className="cps-tx-cta"
+                onClick={() => onAppointment(d.name)}
               >
                 Solicitar cita <IcoArrow size={14} />
-              </a>
+              </button>
             </div>
           </div>
         ))}
@@ -488,7 +490,7 @@ const TEAM = [
   },
 ];
 
-const PepeLanding = () => (
+const PepeLanding = ({ onAppointment }) => (
   <section id="pepe" className="cps-landing-hero">
     <div className="cps-landing-hero__photo reveal">
       <Ph
@@ -518,12 +520,14 @@ const PepeLanding = () => (
       </div>
 
       <div className="cps-hero__ctas">
-        <a href="https://wa.me/34645752082" target="_blank" rel="noopener noreferrer"
-           className="cps-btn cps-btn-primary">
+        <button type="button" className="cps-btn cps-btn-primary" onClick={() => onAppointment()}>
           Reservar cita
-        </a>
+        </button>
         <a href="tel:+34968295860" className="cps-btn cps-btn-outline">
           <IcoPhone size={18} /> Llamar
+        </a>
+        <a href="mailto:clinicapepesoler@hotmail.com" className="cps-btn cps-btn-outline">
+          <IcoMail size={18} /> Contactar
         </a>
       </div>
     </div>
@@ -621,7 +625,7 @@ const VisitSummary = () => {
           <IcoPhone size={20} />
           <h3>Contacto</h3>
           <a href="tel:+34968295860">968 29 58 60</a>
-          <a href="https://wa.me/34645752082" target="_blank" rel="noopener noreferrer">645 75 20 82</a>
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">645 75 20 82</a>
           <a href="mailto:clinicapepesoler@hotmail.com">clinicapepesoler@hotmail.com</a>
         </div>
 
@@ -649,7 +653,7 @@ const VisitSummary = () => {
 };
 
 // ─── WhatsApp flotante ────────────────────────────────────────────
-const WaFloat = () => {
+const WaFloat = ({ onAppointment }) => {
   const [visible, setVisible] = React.useState(false);
 
   React.useEffect(() => {
@@ -664,27 +668,151 @@ const WaFloat = () => {
   }, []);
 
   return (
-    <a
-      href="https://wa.me/34645752082"
-      target="_blank"
-      rel="noopener noreferrer"
+    <button
+      type="button"
+      onClick={() => onAppointment()}
       className={`cps-wa-float${visible ? " is-visible" : ""}`}
-      aria-label="Contactar por WhatsApp"
+      aria-label="Pedir cita por WhatsApp"
     >
       <IcoWhats size={22} />
       <span>Pedir cita</span>
-    </a>
+    </button>
+  );
+};
+
+const APPOINTMENT_DEFAULTS = {
+  name: "",
+  reason: "Dolor o molestia",
+  treatment: "No lo sé, prefiero que me orientéis",
+  time: "Me adapto",
+  note: "",
+};
+
+const AppointmentModal = ({ open, initialTreatment, onClose }) => {
+  const [form, setForm] = React.useState(APPOINTMENT_DEFAULTS);
+
+  React.useEffect(() => {
+    if (!open) return undefined;
+
+    setForm({
+      ...APPOINTMENT_DEFAULTS,
+      treatment: initialTreatment || APPOINTMENT_DEFAULTS.treatment,
+    });
+
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") onClose();
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [initialTreatment, onClose, open]);
+
+  if (!open) return null;
+
+  const update = (field) => (event) => {
+    setForm((current) => ({ ...current, [field]: event.target.value }));
+  };
+
+  const send = (event) => {
+    event.preventDefault();
+
+    const lines = [
+      "Hola, me gustaría pedir cita en Clínica Pepe Soler.",
+      form.name.trim() ? `Nombre: ${form.name.trim()}` : "",
+      `Motivo: ${form.reason}`,
+      `Tratamiento: ${form.treatment}`,
+      `Preferencia de horario: ${form.time}`,
+      form.note.trim() ? `Comentario: ${form.note.trim()}` : "",
+    ].filter(Boolean);
+
+    window.open(`${WHATSAPP_URL}?text=${encodeURIComponent(lines.join("\n"))}`, "_blank", "noopener,noreferrer");
+    onClose();
+  };
+
+  return (
+    <div className="cps-appointment" role="dialog" aria-modal="true" aria-labelledby="appointment-title">
+      <button type="button" className="cps-appointment__backdrop" aria-label="Cerrar" onClick={onClose} />
+      <form className="cps-appointment__panel" onSubmit={send}>
+        <div className="cps-appointment__head">
+          <div>
+            <div className="cps-overline">Cita previa</div>
+            <h2 id="appointment-title">Cuéntanos qué necesitas.</h2>
+          </div>
+          <button type="button" className="cps-appointment__close" onClick={onClose} aria-label="Cerrar">
+            <span />
+            <span />
+          </button>
+        </div>
+
+        <label className="cps-field">
+          <span>Nombre</span>
+          <input value={form.name} onChange={update("name")} placeholder="Opcional" />
+        </label>
+
+        <label className="cps-field">
+          <span>Motivo</span>
+          <select value={form.reason} onChange={update("reason")}>
+            <option>Dolor o molestia</option>
+            <option>Lesión deportiva</option>
+            <option>Revisión o mantenimiento</option>
+            <option>Consulta para bebé o niño</option>
+            <option>Postoperatorio</option>
+            <option>Otro</option>
+          </select>
+        </label>
+
+        <label className="cps-field">
+          <span>Tratamiento</span>
+          <select value={form.treatment} onChange={update("treatment")}>
+            <option>No lo sé, prefiero que me orientéis</option>
+            <option>Osteopatía</option>
+            <option>Fisioterapia</option>
+          </select>
+        </label>
+
+        <label className="cps-field">
+          <span>Horario</span>
+          <select value={form.time} onChange={update("time")}>
+            <option>Me adapto</option>
+            <option>Mañana</option>
+            <option>Tarde</option>
+          </select>
+        </label>
+
+        <label className="cps-field">
+          <span>Comentario</span>
+          <textarea value={form.note} onChange={update("note")} rows="3" placeholder="Opcional" />
+        </label>
+
+        <div className="cps-appointment__actions">
+          <button type="submit" className="cps-btn cps-btn-primary">
+            Pedir cita por WhatsApp <IcoWhats size={18} />
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 
 // ─── Footer ───────────────────────────────────────────────────────
 const Footer = () => (
   <footer className="cps-footer">
-    <div>
+    <div className="cps-footer__legal">
       © 2026 Clínica de Osteopatía y Fisioterapia Pepe Soler ·{" "}
       Fisioterapeuta Col. 39 · Osteópata D.O. (F.) MROE-226
     </div>
-    <div style={{ display: "flex", gap: 18, flexWrap: "wrap" }}>
+    <div className="cps-footer__credit">
+      Made in Murcia by{" "}
+      <a href="mailto:danimeseguerdev@gmail.com" aria-label="Enviar email a Dani Meseguer">
+        Dani Meseguer
+      </a>{" "}
+      🍋
+    </div>
+    <div className="cps-footer__links">
       <a href="aviso-legal.html">Aviso legal</a>
       <a href="privacidad.html">Privacidad</a>
       <a href="cookies.html">Cookies</a>
@@ -695,19 +823,32 @@ const Footer = () => (
 // ─── Root ─────────────────────────────────────────────────────────
 const VariantA = () => {
   useReveal();
+  const [appointment, setAppointment] = React.useState({ open: false, treatment: "" });
+  const openAppointment = React.useCallback((treatment = "") => {
+    setAppointment({ open: true, treatment });
+  }, []);
+  const closeAppointment = React.useCallback(() => {
+    setAppointment((current) => ({ ...current, open: false }));
+  }, []);
+
   return (
     <div className="cps-root">
       <ClinicHeader />
       <Nav />
       <main>
-        <PepeLanding />
+        <PepeLanding onAppointment={openAppointment} />
         <TeamSection />
-        <Treatments />
+        <Treatments onAppointment={openAppointment} />
         <ClinicGallery />
         <VisitSummary />
       </main>
       <Footer />
-      <WaFloat />
+      <WaFloat onAppointment={openAppointment} />
+      <AppointmentModal
+        open={appointment.open}
+        initialTreatment={appointment.treatment}
+        onClose={closeAppointment}
+      />
     </div>
   );
 };
