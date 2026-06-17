@@ -1079,10 +1079,20 @@
 .cps-footer a { color: inherit; transition: color var(--t-fast), border-color var(--t-fast), background var(--t-fast); }
 .cps-footer__credit a { color: rgba(255,255,255,.9); }
 .cps-footer__links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
   border: 1px solid rgba(207,229,224,.18);
   border-radius: 999px;
   padding: 6px 11px;
   background: rgba(255,255,255,.035);
+}
+.cps-footer__social {
+  color: rgba(255,255,255,.92);
+  border-color: rgba(94,234,212,.32) !important;
+}
+.cps-footer__social svg {
+  flex: 0 0 auto;
 }
 .cps-footer a:hover {
   color: rgba(255,255,255,1);
