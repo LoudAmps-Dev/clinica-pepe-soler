@@ -187,7 +187,7 @@ const useSliderDots = (count) => {
     if (!rail || !item) return;
 
     rail.scrollTo({
-      left: item.offsetLeft - 16,
+      left: item.clientWidth >= rail.clientWidth * 0.9 ? item.offsetLeft : item.offsetLeft - 16,
       behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
     });
   }, []);
@@ -404,7 +404,7 @@ const DISCIPLINES = [
     num: "01",
     ico: <IcoSpine size={22} />,
     name: "Osteopatía",
-    desc: "Tratamiento manual global del cuerpo. Trabaja la estructura, las vísceras, el cráneo y la esfera emocional para restablecer el equilibrio.",
+    desc: "Tratamiento manual global del cuerpo. Trabaja la estructura, las vísceras, el cráneo y la esfera emocional para restablecer el equilibrio corporal.",
     items: ["Pediátrica", "Estructural", "Craneal", "Visceral", "Somato-emocional", "Posturología", "Deportiva"],
     dark: false,
   },
@@ -474,20 +474,20 @@ const Treatments = ({ onAppointment }) => {
 const TEAM = [
   {
     name: "José Antonio Soler García",
-    role: "Osteópata",
-    text: "Máster en Osteopatía Pediátrica",
+    role: "Osteópata D.O. (F.)",
+    text: "Máster Universitario en Osteopatía Pediátrica",
     photo: "assets/Equipo/Jose%20Antonio%20Soler%20Garcia.jpg",
   },
   {
     name: "César Cerezo",
     role: "Fisioterapeuta",
-    text: "",
+    text: "Máster en Fisioterapia Neurológica",
     photo: "assets/Equipo/Cesar%20Cerezo.jpg",
   },
   {
     name: "Lydia Rubio",
     role: "Fisioterapeuta",
-    text: "",
+    text: "Máster en Fisioterapia Deportiva",
     photo: "assets/Equipo/Lydia%20Rubio.jpg",
   },
   {
@@ -514,7 +514,7 @@ const PepeLanding = ({ onAppointment }) => (
       <div className="cps-overline">Clínica sanitaria en Murcia desde 1993</div>
       <h1 className="cps-hero__h1">Pepe Soler</h1>
       <p className="cps-landing-hero__role">
-        Fisioterapeuta colegiado 039 · Osteópata D.O. (F.) MROE-226
+        FISIOTERAPEUTA COL. 039 · Osteópata D.O. (F.) MROE-226
       </p>
       <p className="cps-hero__lead">
         Doctor por la Universidad de Murcia y director de su Escuela de Osteopatía.
@@ -587,6 +587,9 @@ const MAPS_URL = "https://maps.google.com/?q=Cl%C3%ADnica+Osteopatia+Fisioterapi
 
 const ClinicGallery = () => {
   const { ref: galleryRef, active: galleryActive, goTo: galleryGoTo } = useSliderDots(GALLERY.length);
+  const previousSlide = () => galleryGoTo((galleryActive - 1 + GALLERY.length) % GALLERY.length);
+  const nextSlide = () => galleryGoTo((galleryActive + 1) % GALLERY.length);
+
   return (
     <section className="cps-landing-section cps-clinic-gallery">
       <div className="cps-landing-section__head reveal">
@@ -607,12 +610,30 @@ const ClinicGallery = () => {
         </div>
       </div>
 
-      <div className="cps-clinic-gallery__grid" ref={galleryRef}>
-        {GALLERY.map(([src, alt]) => (
-          <div key={src} className="cps-clinic-gallery__item reveal">
-            <Ph src={src} alt={alt} label="Clínica Pepe Soler" objectPosition="center" />
-          </div>
-        ))}
+      <div className="cps-clinic-gallery__slider reveal">
+        <div className="cps-clinic-gallery__grid" ref={galleryRef}>
+          {GALLERY.map(([src, alt]) => (
+            <div key={src} className="cps-clinic-gallery__item">
+              <Ph src={src} alt={alt} label="Clínica Pepe Soler" objectPosition="center" />
+            </div>
+          ))}
+        </div>
+        <button
+          type="button"
+          className="cps-clinic-gallery__control cps-clinic-gallery__control--prev"
+          onClick={previousSlide}
+          aria-label="Ver foto anterior de la clínica"
+        >
+          <IcoArrow size={18} />
+        </button>
+        <button
+          type="button"
+          className="cps-clinic-gallery__control cps-clinic-gallery__control--next"
+          onClick={nextSlide}
+          aria-label="Ver foto siguiente de la clínica"
+        >
+          <IcoArrow size={18} />
+        </button>
       </div>
       <SliderDots count={GALLERY.length} active={galleryActive} onSelect={galleryGoTo} label="La clínica" />
     </section>
@@ -770,15 +791,6 @@ const AppointmentModal = ({ open, initialTreatment, onClose }) => {
             <option>Consulta para bebé o niño</option>
             <option>Postoperatorio</option>
             <option>Otro</option>
-          </select>
-        </label>
-
-        <label className="cps-field">
-          <span>Tratamiento</span>
-          <select value={form.treatment} onChange={update("treatment")}>
-            <option>No lo sé, prefiero que me orientéis</option>
-            <option>Osteopatía</option>
-            <option>Fisioterapia</option>
           </select>
         </label>
 

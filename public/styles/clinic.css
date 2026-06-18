@@ -754,6 +754,29 @@
 .cps-clinic-gallery {
   background: var(--c-paper);
 }
+.cps-clinic-gallery .cps-slide-dots {
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+  width: 100%;
+  max-width: 1120px;
+  margin: 16px auto 0;
+}
+.cps-clinic-gallery .cps-slide-dots button {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(79,107,106,.32);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: width var(--t-mid), background var(--t-mid);
+}
+.cps-clinic-gallery .cps-slide-dots button.is-active {
+  width: 22px;
+  background: var(--c-teal-600);
+}
 .cps-inline-link {
   display: inline-flex;
   align-items: center;
@@ -766,20 +789,65 @@
 .cps-inline-link:hover {
   color: var(--c-teal-600);
 }
-.cps-clinic-gallery__grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+.cps-clinic-gallery__slider {
+  position: relative;
   width: 100%;
   max-width: 1120px;
   margin: 0 auto;
 }
-.cps-clinic-gallery__item {
-  height: clamp(190px, 20vw, 250px);
-  overflow: hidden;
+.cps-clinic-gallery__grid {
+  display: flex;
+  gap: 0;
+  width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
   border: 1px solid var(--c-rule);
   background: var(--c-bg);
-  box-shadow: 0 14px 34px -30px rgba(8,47,44,.24);
+  box-shadow: 0 18px 42px -34px rgba(8,47,44,.32);
+}
+.cps-clinic-gallery__grid::-webkit-scrollbar {
+  display: none;
+}
+.cps-clinic-gallery__item {
+  flex: 0 0 100%;
+  height: clamp(320px, 42vw, 520px);
+  overflow: hidden;
+  scroll-snap-align: start;
+  background: var(--c-bg);
+}
+.cps-root .cps-clinic-gallery__control {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(255,255,255,.74);
+  border-radius: 50%;
+  background: rgba(255,255,255,.82);
+  color: var(--c-teal-700);
+  box-shadow: 0 16px 34px -22px rgba(8,47,44,.46);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  transform: translateY(-50%);
+  transition: background var(--t-fast), color var(--t-fast), transform var(--t-fast);
+}
+.cps-root .cps-clinic-gallery__control:hover {
+  background: #fff;
+  color: var(--c-teal-600);
+  transform: translateY(-50%) scale(1.04);
+}
+.cps-clinic-gallery__control--prev {
+  left: 18px;
+}
+.cps-clinic-gallery__control--prev svg {
+  transform: rotate(180deg);
+}
+.cps-clinic-gallery__control--next {
+  right: 18px;
 }
 .cps-visit-grid {
   display: grid;
