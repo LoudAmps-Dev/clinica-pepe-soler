@@ -647,26 +647,26 @@
   background: var(--c-rule);
 }
 .cps-landing-stat {
-  min-height: 96px;
-  padding: 18px;
+  min-height: 60px;
+  padding: 12px;
   background: #fff;
 }
 .cps-landing-stat strong {
   display: block;
   font-family: var(--font-serif);
-  font-size: clamp(1.8rem, 2.5vw, 2.55rem);
+  font-size: clamp(1.1rem, 1.5vw, 1.55rem);
   line-height: 1;
   font-weight: 400;
   color: var(--c-ink);
 }
 .cps-landing-stat span {
   display: block;
-  margin-top: 8px;
+  margin-top: 4px;
   color: var(--c-muted);
-  font-size: var(--text-xs);
+  font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: .06em;
-  line-height: 1.35;
+  line-height: 1.2;
   text-transform: uppercase;
 }
 .cps-landing-section {
