@@ -853,8 +853,8 @@ const AppointmentModal = ({ open, initialTreatment, onClose }) => {
 const CookieBanner = ({ onAccept, onDecline }) => (
   <div className="cps-cookie-banner" role="dialog" aria-label="Aviso de cookies">
     <p className="cps-cookie-banner__text">
-      Esta web carga tipografías desde Google Fonts, lo que implica enviar tu IP a Google.{" "}
-      <a href="/cookies.html" className="cps-cookie-banner__link">Política de cookies</a>
+      Usamos cookies técnicas propias y de terceros para mejorar tu experiencia de navegación.{" "}
+      <a href="/cookies.html" className="cps-cookie-banner__link">Más información</a>
     </p>
     <div className="cps-cookie-banner__actions">
       <button type="button" className="cps-cookie-banner__decline" onClick={onDecline}>
