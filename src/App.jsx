@@ -9,6 +9,37 @@ const WHATSAPP_PHONE = "34645752082";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_PHONE}`;
 const INSTAGRAM_URL = "https://www.instagram.com/osteopatiapsoler/";
 
+const CONSENT_KEY = "cps_cookie_consent";
+
+const loadGoogleFonts = () => {
+  if (document.querySelector("link[data-gfonts]")) return;
+  const hrefs = ["https://fonts.googleapis.com", "https://fonts.gstatic.com"];
+  hrefs.forEach((href, i) => {
+    const pre = document.createElement("link");
+    pre.rel = "preconnect";
+    pre.href = href;
+    if (i === 1) pre.crossOrigin = "anonymous";
+    document.head.appendChild(pre);
+  });
+  const link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.dataset.gfonts = "1";
+  link.href =
+    "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap";
+  document.head.appendChild(link);
+};
+
+const lockBody = () => {
+  const n = parseInt(document.body.dataset.scrollLock || "0", 10);
+  document.body.dataset.scrollLock = n + 1;
+  if (n === 0) document.body.style.overflow = "hidden";
+};
+const unlockBody = () => {
+  const n = Math.max(0, parseInt(document.body.dataset.scrollLock || "0", 10) - 1);
+  document.body.dataset.scrollLock = n;
+  if (n === 0) document.body.style.overflow = "";
+};
+
 // ─── Icons ────────────────────────────────────────────────────────
 const Ico = ({ d, size = 20, sw = 1.6, fill = "none" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill={fill}
@@ -276,8 +307,8 @@ const Ph = ({ src, alt, label, h = "100%", w = "100%", radius = 0, icon, style =
 };
 
 // ─── Brand mark ───────────────────────────────────────────────────
-const BrandMark = ({ size = 40, dark = false }) => (
-  <a href="#" style={{ display: "flex", alignItems: "center", gap: 12 }}>
+const BrandMark = ({ size = 40, dark = false, onClick }) => (
+  <a href="#" onClick={onClick} style={{ display: "flex", alignItems: "center", gap: 12 }}>
     <img src="assets/logo-mark-circle.png" alt="Logo Clínica Pepe Soler"
          width={size} height={size}
          style={{ width: size, height: size, display: "block", flexShrink: 0, objectFit: "contain" }}
@@ -336,10 +367,10 @@ const Nav = () => {
     return () => window.removeEventListener("scroll", h);
   }, []);
 
-  // Prevent body scroll when drawer is open
   React.useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    if (!open) return;
+    lockBody();
+    return () => unlockBody();
   }, [open]);
 
   const close = () => setOpen(false);
@@ -379,7 +410,7 @@ const Nav = () => {
         <div className="cps-drawer__panel" onClick={(e) => e.stopPropagation()}
              role="dialog" aria-modal="true" aria-label="Menú de navegación">
           <div className="cps-drawer__head">
-            <BrandMark size={36} />
+            <BrandMark size={36} onClick={close} />
             <button className="cps-drawer__close" onClick={close} aria-label="Cerrar menú">
               <span />
               <span />
@@ -732,10 +763,10 @@ const AppointmentModal = ({ open, initialTreatment, onClose }) => {
       if (event.key === "Escape") onClose();
     };
 
-    document.body.style.overflow = "hidden";
+    lockBody();
     window.addEventListener("keydown", onKeyDown);
     return () => {
-      document.body.style.overflow = "";
+      unlockBody();
       window.removeEventListener("keydown", onKeyDown);
     };
   }, [initialTreatment, onClose, open]);
@@ -818,6 +849,24 @@ const AppointmentModal = ({ open, initialTreatment, onClose }) => {
   );
 };
 
+// ─── Cookie banner ────────────────────────────────────────────────
+const CookieBanner = ({ onAccept, onDecline }) => (
+  <div className="cps-cookie-banner" role="dialog" aria-label="Aviso de cookies">
+    <p className="cps-cookie-banner__text">
+      Esta web carga tipografías desde Google Fonts, lo que implica enviar tu IP a Google.{" "}
+      <a href="/cookies.html" className="cps-cookie-banner__link">Política de cookies</a>
+    </p>
+    <div className="cps-cookie-banner__actions">
+      <button type="button" className="cps-cookie-banner__decline" onClick={onDecline}>
+        Solo esenciales
+      </button>
+      <button type="button" className="cps-cookie-banner__accept" onClick={onAccept}>
+        Aceptar
+      </button>
+    </div>
+  </div>
+);
+
 // ─── Footer ───────────────────────────────────────────────────────
 const Footer = () => (
   <footer className="cps-footer">
@@ -843,9 +892,9 @@ const Footer = () => (
         <IcoInstagram size={16} />
         Síguenos en Instagram
       </a>
-      <a href="aviso-legal.html">Aviso legal</a>
-      <a href="privacidad.html">Privacidad</a>
-      <a href="cookies.html">Cookies</a>
+      <a href="/aviso-legal.html">Aviso legal</a>
+      <a href="/privacidad.html">Privacidad</a>
+      <a href="/cookies.html">Cookies</a>
     </div>
   </footer>
 );
@@ -853,7 +902,23 @@ const Footer = () => (
 // ─── Root ─────────────────────────────────────────────────────────
 const VariantA = () => {
   useReveal();
+  const [consent, setConsent] = React.useState(() => localStorage.getItem(CONSENT_KEY));
   const [appointment, setAppointment] = React.useState({ open: false, treatment: "" });
+
+  React.useEffect(() => {
+    if (consent === "accepted") loadGoogleFonts();
+  }, [consent]);
+
+  const acceptCookies = React.useCallback(() => {
+    localStorage.setItem(CONSENT_KEY, "accepted");
+    setConsent("accepted");
+  }, []);
+
+  const declineCookies = React.useCallback(() => {
+    localStorage.setItem(CONSENT_KEY, "declined");
+    setConsent("declined");
+  }, []);
+
   const openAppointment = React.useCallback((treatment = "") => {
     setAppointment({ open: true, treatment });
   }, []);
@@ -879,6 +944,9 @@ const VariantA = () => {
         initialTreatment={appointment.treatment}
         onClose={closeAppointment}
       />
+      {consent === null && (
+        <CookieBanner onAccept={acceptCookies} onDecline={declineCookies} />
+      )}
     </div>
   );
 };
