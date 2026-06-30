@@ -8,6 +8,7 @@ const C = {
 const WHATSAPP_PHONE = "34645752082";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_PHONE}`;
 const INSTAGRAM_URL = "https://www.instagram.com/osteopatiapsoler/";
+const SUPERPATCH_URL = "https://juaniclinica.superpatch.com/";
 
 const CONSENT_KEY = "cps_cookie_consent";
 
@@ -867,6 +868,46 @@ const CookieBanner = ({ onAccept, onDecline }) => (
   </div>
 );
 
+// ─── Super Patch ─────────────────────────────────────────────────
+const SuperPatchPromo = () => (
+  <section className="cps-superpatch" aria-labelledby="superpatch-title">
+    <div className="cps-superpatch__inner">
+      <div className="cps-superpatch__copy reveal">
+        <div className="cps-overline">Ventaja para nuestros pacientes</div>
+        <h2 id="superpatch-title" className="cps-h2">Descubre Super Patch.</h2>
+        <p>
+          Benefíciate de descuentos en Super Patch comprando a través de nuestro enlace.
+          Consulta la guía para conocer las distintas opciones disponibles.
+        </p>
+        <a
+          href={SUPERPATCH_URL}
+          className="cps-btn cps-btn-primary cps-superpatch__cta"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Ver productos y descuentos <IcoArrow size={17} />
+        </a>
+        <small>La compra y sus condiciones se gestionan en la web externa de Super Patch.</small>
+      </div>
+
+      <a
+        href="/assets/Parches.png"
+        className="cps-superpatch__guide reveal"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Abrir la guía de selección de Super Patch a tamaño completo"
+      >
+        <img
+          src="/assets/Parches.png"
+          alt="Guía de selección rápida de productos Super Patch"
+          loading="lazy"
+        />
+        <span>Ver guía ampliada <IcoArrow size={14} /></span>
+      </a>
+    </div>
+  </section>
+);
+
 // ─── Footer ───────────────────────────────────────────────────────
 const Footer = () => (
   <footer className="cps-footer">
@@ -875,11 +916,10 @@ const Footer = () => (
       <span>Fisioterapeuta Col. 39 · Osteópata D.O. (F.) MROE-226</span>
     </div>
     <div className="cps-footer__credit">
-      Made in Murcia by{" "}
-      <a href="mailto:danimeseguerdev@gmail.com" aria-label="Enviar email a Dani Meseguer">
-        Dani Meseguer
-      </a>{" "}
-      🍋
+      Hecho en Murcia por{" "}
+      <a href="https://www.terrenoweb.es/" target="_blank" rel="noopener noreferrer">
+        TerrenoWeb
+      </a>
     </div>
     <div className="cps-footer__links">
       <a
@@ -936,6 +976,7 @@ const VariantA = () => {
         <Treatments onAppointment={openAppointment} />
         <ClinicGallery />
         <VisitSummary />
+        <SuperPatchPromo />
       </main>
       <Footer />
       <WaFloat onAppointment={openAppointment} />
