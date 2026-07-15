@@ -1149,7 +1149,7 @@
 .cps-superpatch__guide img {
   width: 100%;
   aspect-ratio: 1672 / 941;
-  object-fit: cover;
+  object-fit: contain;
 }
 .cps-superpatch__guide span {
   position: absolute;

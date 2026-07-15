@@ -254,7 +254,7 @@ const SliderDots = ({ count, active, onSelect, label }) => (
 );
 
 // ─── Photo/placeholder component ──────────────────────────────────
-const Ph = ({ src, alt, label, h = "100%", w = "100%", radius = 0, icon, style = {}, objectPosition = "center" }) => {
+const Ph = ({ src, alt, label, h = "100%", w = "100%", radius = 0, icon, style = {}, objectPosition = "center", lazy = true }) => {
   const [loaded, setLoaded] = React.useState(false);
   const [srcIndex, setSrcIndex] = React.useState(0);
   const sources = Array.isArray(src) ? src : [src];
@@ -291,6 +291,7 @@ const Ph = ({ src, alt, label, h = "100%", w = "100%", radius = 0, icon, style =
       {showImage && (
         <img
           src={currentSrc} alt={alt || label}
+          loading={lazy ? "lazy" : "eager"}
           onLoad={() => setLoaded(true)}
           onError={() => {
             setLoaded(false);
@@ -538,6 +539,7 @@ const PepeLanding = ({ onAppointment }) => (
         label="Foto · Pepe Soler"
         icon={<IcoHand size={84} sw={1} />}
         objectPosition="center 20%"
+        lazy={false}
       />
     </div>
 
