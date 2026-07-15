@@ -1323,6 +1323,11 @@
   .cps-nav__burger { display: flex; flex-direction: row; align-items: center; }
 
   .cps-landing-hero { grid-template-columns: 1fr; }
+  .cps-superpatch__inner { grid-template-columns: 1fr; }
+  .cps-superpatch__copy { text-align: center; }
+  .cps-superpatch__copy p,
+  .cps-superpatch__copy small { margin-left: auto; margin-right: auto; }
+  .cps-root .cps-superpatch__cta { width: 100%; }
   .cps-team-grid,
   .cps-tx-panels,
   .cps-clinic-gallery__grid {
@@ -1440,10 +1445,6 @@
   .cps-hero__grid    { grid-template-columns: 1fr; gap: 40px; }
   .cps-about__grid   { grid-template-columns: 1fr; }
   .cps-contact__grid { grid-template-columns: 1fr; }
-  .cps-superpatch__inner { grid-template-columns: 1fr; }
-  .cps-superpatch__copy { text-align: center; }
-  .cps-superpatch__copy p,
-  .cps-superpatch__copy small { margin-left: auto; margin-right: auto; }
 
   .cps-hero__lead { max-width: 100%; }
   .cps-hero-img-wrap  { height: 380px; }
@@ -1498,7 +1499,6 @@
   .cps-about-img-wrap { height: 280px; }
   .cps-trust__item { padding: 12px 16px; }
   .cps-superpatch { padding-top: 42px; padding-bottom: 42px; }
-  .cps-root .cps-superpatch__cta { width: 100%; }
   .cps-superpatch__guide span { right: 8px; bottom: 8px; }
   .cps-footer {
     padding-top: 24px;
