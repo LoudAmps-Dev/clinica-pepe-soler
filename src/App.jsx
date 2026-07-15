@@ -309,8 +309,8 @@ const Ph = ({ src, alt, label, h = "100%", w = "100%", radius = 0, icon, style =
 
 // ─── Brand mark ───────────────────────────────────────────────────
 const BrandMark = ({ size = 40, dark = false, onClick }) => (
-  <a href="#" onClick={onClick} style={{ display: "flex", alignItems: "center", gap: 12 }}>
-    <img src="assets/logo-mark-circle.png" alt="Logo Clínica Pepe Soler"
+  <a href="/" onClick={onClick} style={{ display: "flex", alignItems: "center", gap: 12 }}>
+    <img src="/assets/logo-mark-circle.png" alt="Logo Clínica Pepe Soler"
          width={size} height={size}
          style={{ width: size, height: size, display: "block", flexShrink: 0, objectFit: "contain" }}
     />
@@ -326,9 +326,9 @@ const BrandMark = ({ size = 40, dark = false, onClick }) => (
 // ─── Clinic header ────────────────────────────────────────────────
 const ClinicHeader = () => (
   <header className="cps-clinic-header">
-    <a href="#" className="cps-clinic-header__brand" aria-label="Clínica Pepe Soler">
+    <a href="/" className="cps-clinic-header__brand" aria-label="Clínica Pepe Soler">
       <img
-        src="assets/logo-mark-circle.png"
+        src="/assets/logo-mark-circle.png"
         alt="Logo Clínica Pepe Soler"
         className="cps-clinic-header__logo"
         width="58"
@@ -456,7 +456,6 @@ const Treatments = ({ onAppointment }) => {
     <section
       id="tratamientos"
       className="cps-section cps-tx-section"
-      style={{ background: C.bg, paddingLeft: 0, paddingRight: 0, paddingBottom: 0 }}
     >
       <div className="reveal cps-tx-header">
         <div className="cps-overline" style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -508,25 +507,25 @@ const TEAM = [
     name: "José Antonio Soler García",
     role: "Osteópata D.O. (F.)",
     text: "Máster Universitario en Osteopatía Pediátrica",
-    photo: "assets/Equipo/Jose%20Antonio%20Soler%20Garcia.jpg",
+    photo: "/assets/Equipo/Jose%20Antonio%20Soler%20Garcia.jpg",
   },
   {
     name: "César Cerezo",
     role: "Fisioterapeuta",
     text: "Máster en Fisioterapia Neurológica",
-    photo: "assets/Equipo/Cesar%20Cerezo.jpg",
+    photo: "/assets/Equipo/Cesar%20Cerezo.jpg",
   },
   {
     name: "Lydia Rubio",
     role: "Fisioterapeuta",
     text: "Máster en Fisioterapia Deportiva",
-    photo: "assets/Equipo/Lydia%20Rubio.jpg",
+    photo: "/assets/Equipo/Lydia%20Rubio.jpg",
   },
   {
     name: "Juana Pérez Valero",
     role: "Recepcionista",
     text: "",
-    photo: "assets/Equipo/Juana%20Perez%20Valero.jpg",
+    photo: "/assets/Equipo/Juana%20Perez%20Valero.jpg",
   },
 ];
 
@@ -534,7 +533,7 @@ const PepeLanding = ({ onAppointment }) => (
   <section id="pepe" className="cps-landing-hero">
     <div className="cps-landing-hero__photo reveal">
       <Ph
-        src="assets/Equipo/Pepe.jpg"
+        src="/assets/Equipo/Pepe.jpg"
         alt="Pepe Soler, fisioterapeuta y osteópata"
         label="Foto · Pepe Soler"
         icon={<IcoHand size={84} sw={1} />}
@@ -610,9 +609,9 @@ const TeamSection = () => {
 };
 
 const GALLERY = [
-  ["assets/Equipo/clinica1.jpg", "Consulta de Clínica Pepe Soler"],
-  ["assets/Equipo/clinica2.jpg", "Sala de tratamiento de Clínica Pepe Soler"],
-  ["assets/Equipo/clinica3.jpg", "Instalaciones de Clínica Pepe Soler"],
+  ["/assets/Equipo/clinica1.jpg", "Consulta de Clínica Pepe Soler"],
+  ["/assets/Equipo/clinica2.jpg", "Sala de tratamiento de Clínica Pepe Soler"],
+  ["/assets/Equipo/clinica3.jpg", "Instalaciones de Clínica Pepe Soler"],
 ];
 
 const MAPS_URL = "https://maps.google.com/?q=Cl%C3%ADnica+Osteopatia+Fisioterapia+Pepe+Soler+Calle+Pina+6+Murcia";
@@ -900,6 +899,8 @@ const SuperPatchPromo = () => (
         <img
           src="/assets/Parches.png"
           alt="Guía de selección rápida de productos Super Patch"
+          width="1672"
+          height="941"
           loading="lazy"
         />
         <span>Ver guía ampliada <IcoArrow size={14} /></span>
