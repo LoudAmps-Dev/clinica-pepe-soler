@@ -1135,7 +1135,6 @@
 .cps-superpatch__guide {
   position: relative;
   display: block;
-  overflow: hidden;
   background: #fff;
   border: 1px solid rgba(17,94,89,.14);
   box-shadow: var(--s-lg);
