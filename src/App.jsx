@@ -892,14 +892,14 @@ const SuperPatchPromo = () => (
       </div>
 
       <a
-        href="/assets/Parches.png"
+        href="/assets/Parches.jpg"
         className="cps-superpatch__guide reveal"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Abrir la guía de selección de Super Patch a tamaño completo"
       >
         <img
-          src="/assets/Parches.png"
+          src="/assets/Parches.jpg"
           alt="Guía de selección rápida de productos Super Patch"
           width="1672"
           height="941"
