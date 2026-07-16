@@ -160,7 +160,7 @@
 }
 .cps-clinic-header__name {
   font-family: var(--font-serif);
-  font-size: clamp(1.55rem, 1.2rem + 1.25vw, 2.2rem);
+  font-size: clamp(1.9rem, 1.5rem + 1.6vw, 2.7rem);
   line-height: 1;
   color: var(--c-ink);
 }
@@ -588,19 +588,30 @@
 /* ─── 7B. CONDENSED LANDING ───────────────────────────────────── */
 .cps-landing-hero {
   display: grid;
-  grid-template-columns: minmax(300px, .82fr) minmax(0, 1fr);
+  grid-template-columns: minmax(240px, .62fr) minmax(0, 1fr);
   align-items: center;
   gap: clamp(32px, 5vw, 72px);
   padding: clamp(44px, 5.5vw, 72px) var(--px);
   background: var(--c-paper);
   scroll-margin-top: var(--nav-h);
 }
+.cps-landing-hero__photo-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 .cps-landing-hero__photo {
   position: relative;
-  height: clamp(360px, 42vw, 520px);
+  height: clamp(280px, 30vw, 380px);
   overflow: hidden;
   border: 1px solid var(--c-rule);
-  box-shadow: var(--s-image);
+}
+.cps-landing-hero__caption {
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--c-muted);
+  text-align: center;
+  letter-spacing: .01em;
 }
 .cps-landing-hero__copy .cps-hero__h1 {
   margin: 10px 0 8px;
@@ -1430,7 +1441,11 @@
     gap: 7px 12px;
     max-width: none;
   }
-  .cps-clinic-header__meta span { width: auto; justify-content: flex-start; }
+  .cps-clinic-header__meta span {
+    width: 100%;
+    justify-content: flex-start;
+    white-space: normal;
+  }
   .cps-clinic-header__email { display: none !important; }
   .cps-nav { height: 58px; }
   .cps-landing-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -1438,8 +1453,7 @@
   .cps-landing-stat strong { font-size: clamp(1.35rem, 5vw, 1.8rem); }
   .cps-landing-stat span { font-size: .65rem; }
   .cps-landing-hero__photo {
-    height: 360px;
-    box-shadow: 0 10px 24px -22px rgba(8,47,44,.20);
+    height: 300px;
   }
 
   .cps-hero__grid    { grid-template-columns: 1fr; gap: 40px; }
@@ -1475,7 +1489,7 @@
   .cps-clinic-header { padding-top: 12px; padding-bottom: 12px; }
   .cps-clinic-header__brand { gap: 12px; }
   .cps-clinic-header__logo { width: 46px; height: 46px; }
-  .cps-clinic-header__name { font-size: 1.35rem; }
+  .cps-clinic-header__name { font-size: 1.6rem; }
   .cps-clinic-header__sub { font-size: .78rem; line-height: 1.25; }
   .cps-clinic-header__meta { gap: 7px 10px; }
   .cps-clinic-header__meta span,
@@ -1483,8 +1497,7 @@
   .cps-landing-hero { padding-top: 28px; padding-bottom: 32px; gap: 20px; }
   .cps-landing-section { padding-top: 36px; padding-bottom: 40px; }
   .cps-landing-hero__photo {
-    height: 320px;
-    box-shadow: 0 8px 18px -18px rgba(8,47,44,.18);
+    height: 260px;
   }
   .cps-team-card { padding: 18px; }
   .cps-team-card,

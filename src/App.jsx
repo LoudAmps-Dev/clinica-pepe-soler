@@ -532,15 +532,20 @@ const TEAM = [
 
 const PepeLanding = ({ onAppointment }) => (
   <section id="pepe" className="cps-landing-hero">
-    <div className="cps-landing-hero__photo reveal">
-      <Ph
-        src="/assets/Equipo/Pepe.jpg"
-        alt="Pepe Soler, fisioterapeuta y osteópata"
-        label="Foto · Pepe Soler"
-        icon={<IcoHand size={84} sw={1} />}
-        objectPosition="center 20%"
-        lazy={false}
-      />
+    <div className="cps-landing-hero__photo-wrap reveal">
+      <div className="cps-landing-hero__photo">
+        <Ph
+          src="/assets/Equipo/Pepe.jpg"
+          alt="Pepe Soler, fisioterapeuta y osteópata"
+          label="Foto · Pepe Soler"
+          icon={<IcoHand size={84} sw={1} />}
+          objectPosition="center 20%"
+          lazy={false}
+        />
+      </div>
+      <p className="cps-landing-hero__caption">
+        Director de la Escuela Universitaria de Osteopatía
+      </p>
     </div>
 
     <div className="cps-landing-hero__copy reveal">
