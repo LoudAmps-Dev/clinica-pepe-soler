@@ -543,9 +543,6 @@ const PepeLanding = ({ onAppointment }) => (
           lazy={false}
         />
       </div>
-      <p className="cps-landing-hero__caption">
-        Director de la Escuela Universitaria de Osteopatía
-      </p>
     </div>
 
     <div className="cps-landing-hero__copy reveal">
@@ -555,7 +552,7 @@ const PepeLanding = ({ onAppointment }) => (
         FISIOTERAPEUTA COL. 039 · Osteópata D.O. (F.) MROE-226
       </p>
       <p className="cps-hero__lead">
-        Doctor por la Universidad de Murcia y director de la Escuela de Osteopatía.
+        Doctor por la Universidad de Murcia y director de la Escuela Universitaria de Osteopatía.
         Más de 45 años integrando exploración, razonamiento clínico y tratamiento manual.
       </p>
 
