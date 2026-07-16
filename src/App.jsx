@@ -311,7 +311,7 @@ const Ph = ({ src, alt, label, h = "100%", w = "100%", radius = 0, icon, style =
 // ─── Brand mark ───────────────────────────────────────────────────
 const BrandMark = ({ size = 40, dark = false, onClick }) => (
   <a href="/" onClick={onClick} style={{ display: "flex", alignItems: "center", gap: 12 }}>
-    <img src="/assets/logo-mark-circle.png" alt="Logo Clínica Pepe Soler"
+    <img src="/assets/logo-manos.png" alt="Logo Clínica Pepe Soler"
          width={size} height={size}
          style={{ width: size, height: size, display: "block", flexShrink: 0, objectFit: "contain" }}
     />
@@ -329,7 +329,7 @@ const ClinicHeader = () => (
   <header className="cps-clinic-header">
     <a href="/" className="cps-clinic-header__brand" aria-label="Clínica Pepe Soler">
       <img
-        src="/assets/logo-mark-circle.png"
+        src="/assets/logo-manos.png"
         alt="Logo Clínica Pepe Soler"
         className="cps-clinic-header__logo"
         width="58"
@@ -550,7 +550,7 @@ const PepeLanding = ({ onAppointment }) => (
         FISIOTERAPEUTA COL. 039 · Osteópata D.O. (F.) MROE-226
       </p>
       <p className="cps-hero__lead">
-        Doctor por la Universidad de Murcia y director de su Escuela de Osteopatía.
+        Doctor por la Universidad de Murcia y director de la Escuela de Osteopatía.
         Más de 45 años integrando exploración, razonamiento clínico y tratamiento manual.
       </p>
 
